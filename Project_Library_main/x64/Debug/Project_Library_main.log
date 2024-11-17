@@ -1,0 +1,115 @@
+﻿  Library.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xmemory(700,82): error C2665: "Book::Book": ни одна перегруженная функция не может преобразовать все типы аргументов
+  (компиляция исходного файла "Library.cpp")
+      C:\Users\Вероника\source\repos\Project_Library_main\Project_Library_main\Book.h(15,2):
+      может быть "Book::Book(std::string *,std::string *,std::string *,int)"
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xmemory(700,82):
+          "Book::Book(std::string *,std::string *,std::string *,int)": невозможно преобразовать аргумент 1 из "std::string" в "std::string *"
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xmemory(700,103):
+              Для выполнения данного преобразования нет доступного оператора преобразования, определенного пользователем, или вызов оператора невозможен
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xmemory(700,82):
+      при попытке сопоставить список аргументов "(std::string, std::string, std::string, std::string)"
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xmemory(700,82):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Users\Вероника\source\repos\Project_Library_main\Project_Library_main\Library.cpp(28,15):
+          выполняется компиляция ссылки на экземпляр шаблон функции "Book &std::vector<Book,std::allocator<Book>>::emplace_back<std::string&,std::string&,std::string&,std::string&>(std::string &,std::string &,std::string &,std::string &)"
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\vector(858,24):
+          выполняется компиляция ссылки на экземпляр шаблон функции "_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_one_at_back<std::string&,std::string&,std::string&,std::string&>(std::string &,std::string &,std::string &,std::string &)"
+          with
+          [
+              _Ty=Book
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\vector(776,20):
+          выполняется компиляция ссылки на экземпляр шаблон функции "_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_back_with_unused_capacity<std::string&,std::string&,std::string&,std::string&>(std::string &,std::string &,std::string &,std::string &)"
+          with
+          [
+              _Ty=Book
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\vector(794,27):
+          выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,std::string&,std::string&,std::string&,std::string&>(_Alloc &,_Objty *const ,std::string &,std::string &,std::string &,std::string &)"
+          with
+          [
+              _Alloc=std::allocator<Book>,
+              _Ty=Book,
+              _Objty=Book
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xmemory(700,82): error C2665: "Person::Person": ни одна перегруженная функция не может преобразовать все типы аргументов
+  (компиляция исходного файла "Library.cpp")
+      C:\Users\Вероника\source\repos\Project_Library_main\Project_Library_main\Person.h(14,2):
+      может быть "Person::Person(int,std::string *,std::string *,std::string *)"
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xmemory(700,82):
+          "Person::Person(int,std::string *,std::string *,std::string *)": невозможно преобразовать аргумент 1 из "std::string" в "int"
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xmemory(700,103):
+              Для выполнения данного преобразования нет доступного оператора преобразования, определенного пользователем, или вызов оператора невозможен
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xmemory(700,82):
+      при попытке сопоставить список аргументов "(std::string, std::string, std::string, std::string)"
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xmemory(700,82):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Users\Вероника\source\repos\Project_Library_main\Project_Library_main\Library.cpp(50,17):
+          выполняется компиляция ссылки на экземпляр шаблон функции "Person &std::vector<Person,std::allocator<Person>>::emplace_back<std::string&,std::string&,std::string&,std::string&>(std::string &,std::string &,std::string &,std::string &)"
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\vector(858,24):
+          выполняется компиляция ссылки на экземпляр шаблон функции "_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_one_at_back<std::string&,std::string&,std::string&,std::string&>(std::string &,std::string &,std::string &,std::string &)"
+          with
+          [
+              _Ty=Person
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\vector(776,20):
+          выполняется компиляция ссылки на экземпляр шаблон функции "_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_back_with_unused_capacity<std::string&,std::string&,std::string&,std::string&>(std::string &,std::string &,std::string &,std::string &)"
+          with
+          [
+              _Ty=Person
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\vector(794,27):
+          выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,std::string&,std::string&,std::string&,std::string&>(_Alloc &,_Objty *const ,std::string &,std::string &,std::string &,std::string &)"
+          with
+          [
+              _Alloc=std::allocator<Person>,
+              _Ty=Person,
+              _Objty=Person
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xmemory(700,82): error C2280: "Book::Book(const Book &)": предпринята попытка ссылки на удаленную функцию
+  (компиляция исходного файла "Library.cpp")
+      C:\Users\Вероника\source\repos\Project_Library_main\Project_Library_main\Book.h(34,1):
+      в этом месте создано компилятором: "Book::Book"
+      C:\Users\Вероника\source\repos\Project_Library_main\Project_Library_main\Book.h(34,1):
+      "Book::Book(const Book &)": функция неявно удалена, так как элемент данных вызывает удаленную или недоступную функцию "std::basic_fstream<char,std::char_traits<char>>::basic_fstream(const std::basic_fstream<char,std::char_traits<char>> &)".
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\fstream(398,5):
+      "std::basic_fstream<char,std::char_traits<char>>::basic_fstream(const std::basic_fstream<char,std::char_traits<char>> &)": функция явно удалена.
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\xmemory(700,82):
+      контекст создания экземпляра шаблона (сначала самый старый)
+          C:\Users\Вероника\source\repos\Project_Library_main\Project_Library_main\Library.h(25,15):
+          выполняется компиляция ссылки на экземпляр класс шаблон функции "std::vector<Book,std::allocator<Book>>"
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\vector(866,23):
+          во время компиляции функции-члена класс шаблон "void std::vector<Book,std::allocator<Book>>::push_back(const _Ty &)"
+          with
+          [
+              _Ty=Book
+          ]
+              C:\Users\Вероника\source\repos\Project_Library_main\Project_Library_main\Library.cpp(61,17):
+              см. первую ссылку на "std::vector<Book,std::allocator<Book>>::push_back" в "Library::AddBook"
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\vector(867,9):
+          выполняется компиляция ссылки на экземпляр шаблон функции "_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_one_at_back<const _Ty&>(const _Ty &)"
+          with
+          [
+              _Ty=Book
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\vector(776,20):
+          выполняется компиляция ссылки на экземпляр шаблон функции "_Ty &std::vector<_Ty,std::allocator<_Ty>>::_Emplace_back_with_unused_capacity<const _Ty&>(const _Ty &)"
+          with
+          [
+              _Ty=Book
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\vector(794,27):
+          выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,const _Ty&>(_Alloc &,_Objty *const ,const _Ty &)"
+          with
+          [
+              _Alloc=std::allocator<Book>,
+              _Ty=Book,
+              _Objty=Book
+          ]
+  
+  Person.cpp
+  Project_Library_main.cpp
+  Создание кода...
