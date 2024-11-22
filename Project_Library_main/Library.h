@@ -4,19 +4,19 @@
 #include "Book.h"
 #include "Person.h"
 #include <fstream>
-#include <filesystem>
-
+//#include <filesystem>
 using namespace std;
-namespace fs = std::filesystem;
+//namespace fs = std::filesystem;
 
 class Library
 {
 public:
+	Library();
 	Library(const string& filenamebook, const string& filenameperson);
 
 	void AddBook(Book& book);
-	
-	//void DeleteBook(Book book);
+
+	void DeleteBook(Book& book); 
 
 	void PrintList();
 

@@ -1,34 +1,34 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-#include <filesystem>
+//#include <filesystem>
 #include <string>
 
 using namespace std;
-namespace fs = std::filesystem;
+//namespace fs = std::filesystem;
 
 class Person
 {
 public:
 	fstream file;
-	Person( int id,  string* name,  string* NumberPhone,  string* email);
-
-	int GetId();
+	Person(const string& id, const string& name, const  string& NumberPhone, const  string& email);
+	Person(const Person& person);
+	string* GetId();
 	string* GetName();
 	string* GetNumberPhone();
 	string* GetEmail();
 
 
-	void SetId(int& id);
-	void SetName(string*& name);
-	void SetNumberPhone(string*& NumberPhone);
-	void SetEmail(string*& email);
+	void SetId(string& id);
+	void SetName(string& name);
+	void SetNumberPhone(string& NumberPhone);
+	void SetEmail(string& email);
 
 	~Person();
 private:
-	int id;
+	string* id;
 	string* name;
 	string* NumberPhone;
 	string* email;
-	
+
 };

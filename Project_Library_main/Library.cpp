@@ -1,24 +1,25 @@
+#pragma once
 #include <iostream>
 #include "Library.h"
 #include "Book.h"
 #include "Person.h"
 #include <fstream>
-#include <filesystem>
+//#include <filesystem>
 #include <string>
 
 using namespace std;
-namespace fs = std::filesystem;
-
+//namespace fs = std::filesystem;
+Library::Library() {}
 Library::Library(const string& filenamebook, const string& filenameperson)
 {
     ifstream file(filenamebook);
 
     if (file.is_open())
-    { 
-        string line; 
+    {
+        string line;
         string genre; string author; string name;
         string year;
-        while (getline(file, line, ' ')) 
+        while (getline(file, line, ' '))
         {
             genre = line;
             author = line;
@@ -28,27 +29,27 @@ Library::Library(const string& filenamebook, const string& filenameperson)
         books.emplace_back(genre, author, name, year);
         file.close();
     }
-    else 
+    else
     {
-        std::cerr << "Unable to open file with books" << std::endl; 
+        std::cerr << "Unable to open file with books" << std::endl;
     }
 
     ifstream file1(filenameperson);
 
-    if (file1.is_open()) 
+    if (file1.is_open())
     {
-        string line; 
+        string line;
         string id; string name; string NumberPhone;
         string email;
         while (getline(file1, line, ' '))
         {
-            id = line;  
-            name = line;  
-            NumberPhone = line;  
+            id = line;
+            name = line;
+            NumberPhone = line;
             email = line;
         }
-        persons.emplace_back(id, name, NumberPhone, email);   
-        file1.close(); 
+        persons.emplace_back(id, name, NumberPhone, email);
+        file1.close();
     }
     else
     {
@@ -56,30 +57,37 @@ Library::Library(const string& filenamebook, const string& filenameperson)
     }
 }
 
-void Library::AddBook(Book& book) 
+void Library::AddBook(Book& book)
 {
-	books.push_back(book);
+    books.emplace_back(book);
 }
 
-//void Library::DeleteBook(Book book)
-//{
-//	books.erase(find(books.begin(), books.end(), book));
-//}
+void Library::DeleteBook(Book& book)
+{
+    for (auto i = books.begin() ; i < books.end(); i++)
+    {
+        if (i->GetName() == book.GetName() && i->GetGenre() == book.GetGenre() && i->GetDate() == book.GetDate() && i->GetAuthor() == book.GetAuthor())
+        {
+            books.erase(i);
+            book.~Book();
+        }
+    }
+}
 
 void Library::PrintList()
 {
-	for (int i = 0; i < books.size(); i++)
-	{
-		cout << books[i].GetAuthor() << ' ' << books[i].GetGenre() << ' ' << books[i].GetName() << ' ' << books[i].GetDate() << endl;
-	}
+    for (int i = 0; i < books.size(); i++)
+    {
+        cout << books[i].GetAuthor() << ' ' << books[i].GetGenre() << ' ' << books[i].GetName() << ' ' << books[i].GetDate() << endl;
+    }
 }
 
 void Library::SearchBook(string* NameBook)
 {
-	for (int i = 0; i < books.size(); i++)
-	{
-		if (books[i].GetName() == NameBook) cout << books[i].GetAuthor() << ' ' << books[i].GetGenre() << ' ' << books[i].GetName() << ' ' << books[i].GetDate() << endl; 
-	}
+    for (int i = 0; i < books.size(); i++)
+    {
+        if (books[i].GetName() == NameBook) cout << books[i].GetAuthor() << ' ' << books[i].GetGenre() << ' ' << books[i].GetName() << ' ' << books[i].GetDate() << endl;
+    }
 }
 
 
