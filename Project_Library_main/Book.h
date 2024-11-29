@@ -13,6 +13,7 @@ public:
 	Book& operator=(const Book& book);
 
 	fstream file_book;
+	Book();
 	Book(const string& author, const string& name, const string& genre, const string& date);
 	Book(const Book&book);
 	string* GetAuthor();
@@ -25,6 +26,10 @@ public:
 	void SetGenre(string& genre);
 	void SetDate(string& date);
 
+	void Print_one_book(Book& book);
+
+
+	void New_Book(Book& book);
 	~Book();
 
 private:

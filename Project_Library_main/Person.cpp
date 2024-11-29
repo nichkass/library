@@ -8,7 +8,7 @@
 using namespace std;
 //namespace fs = std::filesystem;
 
-
+Person::Person() {}
 Person::Person(const string& id, const string& name, const string& NumberPhone, const  string& email)
 {
 	this->id = new string(id);
@@ -22,9 +22,10 @@ Person::Person(const string& id, const string& name, const string& NumberPhone, 
 		file << name << ' ';
 		file << NumberPhone << ' ';
 		file << email << endl;
+		file.close();
 	}
 	else cout << "File is not open" << endl;
-	file.close();
+	
 }
 Person::Person(const Person& person)
 {

@@ -10,25 +10,26 @@ using namespace std;
 class Person
 {
 public:
-	fstream file;
+	Person();
+	 fstream file;
 	Person(const string& id, const string& name, const  string& NumberPhone, const  string& email);
 	Person(const Person& person);
-	string* GetId();
-	string* GetName();
-	string* GetNumberPhone();
-	string* GetEmail();
+	 string* GetId();
+	 string* GetName();
+	 string* GetNumberPhone();
+	 string* GetEmail();
 
 
-	void SetId(string& id);
-	void SetName(string& name);
-	void SetNumberPhone(string& NumberPhone);
-	void SetEmail(string& email);
+	 void SetId(string& id);
+	 void SetName(string& name);
+	 void SetNumberPhone(string& NumberPhone);
+	 void SetEmail(string& email);
 
 	~Person();
 private:
-	string* id;
-	string* name;
-	string* NumberPhone;
-	string* email;
+	 string* id;
+	 string* name;
+	 string* NumberPhone;
+	 string* email;
 
 };

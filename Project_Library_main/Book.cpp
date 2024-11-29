@@ -7,6 +7,7 @@
 
 using namespace std;
 //namespace fs = std::filesystem;
+Book::Book() {}
 Book& Book::operator=(const Book& book)
 {
 
@@ -18,7 +19,7 @@ Book& Book::operator=(const Book& book)
 	return *this;
 }
 
-Book::Book(const string& author, const string& name, const string& genre, const string& date)
+Book::Book(const string& genre, const string& author, const string& name, const string& date)
 {
 	
 	this->author = new string(author);
@@ -29,25 +30,39 @@ Book::Book(const string& author, const string& name, const string& genre, const 
 	file_book.open(namefile, fstream::out | fstream::in | fstream::app);
 	if (file_book.is_open()) {
 		cout << "File sucessful open" << endl;
-		file_book << author << ' ';
 		file_book << genre << ' ';
+		file_book << author << ' ';
 		file_book << name << ' ';
 		file_book << date << std::endl;
+		file_book.close();
 	}
 	else cout << "File is not open" << endl;
-	file_book.close();
+	
 }
 Book::Book(const Book&book)
 {
-	delete[] author;
-	delete[] name;
-	delete[] genre;
-	delete[] date;
+	
 
 	this->author = new string(*book.author);
 	this->name = new string(*book.name);
 	this->genre = new string(*book.genre);
 	this->date = new string(*book.date);
+}
+
+void Book::New_Book(Book& book)
+{
+	Book::Book(book);
+	string namefile = *this->name + ".txt";
+	file_book.open(namefile, fstream::out | fstream::in | fstream::app);
+	if (file_book.is_open()) {
+		cout << "File sucessful open" << endl;
+		file_book << genre << ' ';
+		file_book << author << ' ';
+		file_book << name << ' ';
+		file_book << date << std::endl;
+		file_book.close();
+	}
+	else cout << "File is not open" << endl;
 }
 string* Book::GetAuthor() { return this->author; }
 string* Book::GetName() { return this->name; }
@@ -58,6 +73,11 @@ void Book::SetAuthor(string& author) { this->author = new string(author); }
 void Book::SetName(string& name) { this->name = new string(name); }
 void Book::SetGenre(string& genre) { this->genre = new string(genre); }
 void Book::SetDate(string& date) { this->date = new string(date); }
+
+void Book::Print_one_book(Book& book)
+{
+	cout << book.GetGenre() << ' ' << book.GetAuthor() << ' ' << book.GetName() << ' ' << book.GetDate() << endl;
+}
 
 Book::~Book()
 {
