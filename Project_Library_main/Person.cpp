@@ -2,11 +2,11 @@
 #include <iostream>
 #include "Person.h"
 #include <fstream>
-//#include <filesystem>
+#include <filesystem>
 #include <string>
 
 using namespace std;
-//namespace fs = std::filesystem;
+namespace fs = std::filesystem;
 
 Person::Person() {}
 Person::Person(const string& id, const string& name, const string& NumberPhone, const  string& email)
@@ -34,6 +34,8 @@ Person::Person(const Person& person)
 	this->NumberPhone = person.NumberPhone;
 	this->email = person.email;
 }
+
+
 string* Person::GetId() { return this->id; }
 string* Person::GetName() { return this->name; }
 string* Person::GetNumberPhone() { return this->NumberPhone; }
@@ -47,10 +49,10 @@ void Person::SetEmail(string& email) { this->email = new string(email); }
 
 Person::~Person()
 {
-	delete[] name;
-	delete[] NumberPhone;
-	delete[]email;
-	delete[] id;
+	delete name;
+	delete NumberPhone;
+	delete email;
+	delete id;
 }
 
 

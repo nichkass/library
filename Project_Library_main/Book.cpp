@@ -2,11 +2,12 @@
 #include <iostream>
 #include "Book.h"
 #include <fstream>
-//#include <filesystem>
+#include <filesystem>
 #include <string>
 
 using namespace std;
-//namespace fs = std::filesystem;
+namespace fs = std::filesystem;
+
 Book::Book() {}
 Book& Book::operator=(const Book& book)
 {
@@ -41,7 +42,6 @@ Book::Book(const string& genre, const string& author, const string& name, const 
 }
 Book::Book(const Book&book)
 {
-	
 
 	this->author = new string(*book.author);
 	this->name = new string(*book.name);
@@ -49,20 +49,20 @@ Book::Book(const Book&book)
 	this->date = new string(*book.date);
 }
 
-void Book::New_Book(Book& book)
+void Book::New_Book()
 {
-	Book::Book(book);
 	string namefile = *this->name + ".txt";
 	file_book.open(namefile, fstream::out | fstream::in | fstream::app);
 	if (file_book.is_open()) {
 		cout << "File sucessful open" << endl;
-		file_book << genre << ' ';
-		file_book << author << ' ';
-		file_book << name << ' ';
-		file_book << date << std::endl;
+		file_book << *genre << ' ';
+		file_book << *author << ' ';
+		file_book << *name << ' ';
+		file_book << *date << std::endl;
 		file_book.close();
 	}
 	else cout << "File is not open" << endl;
+	
 }
 string* Book::GetAuthor() { return this->author; }
 string* Book::GetName() { return this->name; }
@@ -76,13 +76,13 @@ void Book::SetDate(string& date) { this->date = new string(date); }
 
 void Book::Print_one_book(Book& book)
 {
-	cout << book.GetGenre() << ' ' << book.GetAuthor() << ' ' << book.GetName() << ' ' << book.GetDate() << endl;
+	cout << *book.GetGenre() << ' ' << *book.GetAuthor() << ' ' << *book.GetName() << ' ' << *book.GetDate() << endl;
 }
 
 Book::~Book()
 {
-	delete[]author;
-	delete[]name;
-	delete[]genre;
-	delete[]date;
+	delete author;
+	delete name;
+	delete genre;
+	delete date;
 }

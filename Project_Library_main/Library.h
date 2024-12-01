@@ -15,6 +15,9 @@ class Library
 public:
 	 fstream file_lib;
 	 fstream file_lib2;
+
+	 fstream file_for_person;
+
 	Library();
 
 	  void AddBook(Book& book);
@@ -23,8 +26,10 @@ public:
 
 	  void PrintList();
 	  void PrintListPersons();
-	  Book SearchBook(string* NameBook);
 
-	  vector<Book> books;
-	  vector<Person> persons;
+
+	  Book* SearchBook(string* NameBook);
+
+	  vector<Book*> books;
+	  vector<Person*> persons;
 };

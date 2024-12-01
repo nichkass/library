@@ -29,7 +29,7 @@ public:
 	void Print_one_book(Book& book);
 
 
-	void New_Book(Book& book);
+	void New_Book();
 	~Book();
 
 private:
