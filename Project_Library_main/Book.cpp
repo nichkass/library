@@ -8,7 +8,7 @@
 using namespace std;
 namespace fs = std::filesystem;
 
-Book::Book() {}
+Book::Book() { this->takes = true; }
 Book& Book::operator=(const Book& book)
 {
 
@@ -68,11 +68,14 @@ string* Book::GetAuthor() { return this->author; }
 string* Book::GetName() { return this->name; }
 string* Book::GetGenre() { return this->genre; }
 string* Book::GetDate() { return this->date; }
+bool Book::GetPrivate() { return this->takes; }
 
 void Book::SetAuthor(string& author) { this->author = new string(author); }
 void Book::SetName(string& name) { this->name = new string(name); }
 void Book::SetGenre(string& genre) { this->genre = new string(genre); }
 void Book::SetDate(string& date) { this->date = new string(date); }
+void Book::SetPrivate() { this->takes = false; }
+void Book::ChangePrivate() { this->takes = true;}
 
 void Book::Print_one_book(Book& book)
 {

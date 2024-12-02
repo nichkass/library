@@ -27,6 +27,7 @@ public:
 	  void PrintList();
 	  void PrintListPersons();
 
+	  void PrintListBookForPerson();
 
 	  Book* SearchBook(string* NameBook);
 

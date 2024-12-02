@@ -3,6 +3,7 @@
 #include <fstream>
 //#include <filesystem>
 #include <string>
+#include "Book.h"
 
 using namespace std;
 //namespace fs = std::filesystem;
@@ -18,18 +19,20 @@ public:
 	 string* GetName();
 	 string* GetNumberPhone();
 	 string* GetEmail();
-
+	 Book* GetMyBook();
 
 	 void SetId(string& id);
 	 void SetName(string& name);
 	 void SetNumberPhone(string& NumberPhone);
 	 void SetEmail(string& email);
-
+	 void TakeBook(Book& book);
+	 void GiveBook(Book& book);
+	 
 	~Person();
 private:
 	 string* id;
 	 string* name;
 	 string* NumberPhone;
 	 string* email;
-
+	 Book* MyBook;
 };

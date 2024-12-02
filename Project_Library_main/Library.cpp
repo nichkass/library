@@ -84,6 +84,16 @@ void Library::PrintListPersons()
     }
 }
 
+void Library::PrintListBookForPerson()
+{
+    for (int i = 0; i < books.size(); i++)
+    {
+        if (books[i]->GetPrivate() == true)
+        {
+            cout << *books[i]->GetGenre() << ' ' << *books[i]->GetAuthor() << ' ' << *books[i]->GetName() << ' ' << *books[i]->GetDate() << endl;
+        }
+    }
+}
 
 Book* Library::SearchBook(string* NameBook)
 {

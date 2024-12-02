@@ -4,6 +4,7 @@
 //#include <filesystem>
 #include <string>
 
+
 using namespace std;
 //namespace fs = std::filesystem;
 
@@ -20,11 +21,14 @@ public:
 	string* GetName();
 	string* GetGenre();
 	string* GetDate();
+	bool GetPrivate();
 
 	void SetAuthor(string& author);
 	void SetName(string& name);
 	void SetGenre(string& genre);
 	void SetDate(string& date);
+	void SetPrivate();
+	void ChangePrivate();
 
 	void Print_one_book(Book& book);
 
@@ -37,4 +41,5 @@ private:
 	string* name;
 	string* genre;
 	string* date; 
+	bool takes;
 };

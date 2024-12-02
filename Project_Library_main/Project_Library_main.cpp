@@ -11,77 +11,78 @@ int main()
 {
     bool flag = false;
     int action = -1;
-        Library lib;
+    Library lib;
 
-        lib.file_lib.open("Library_books.txt", fstream::in );
-        lib.file_lib2.open("Library_persons.txt",  fstream::in );
+    lib.file_lib.open("Library_books.txt", fstream::in);
+    lib.file_lib2.open("Library_persons.txt", fstream::in);
 
-        //Чтение книги
-        if (lib.file_lib.is_open())
+    //Чтение книги
+    if (lib.file_lib.is_open())
+    {
+        string line;
+        string genre, author, name, year;
+        Book* new_book = new Book();
+        while (getline(lib.file_lib, genre, ' ') && getline(lib.file_lib, author, ' ')
+            && getline(lib.file_lib, name, ' ')
+            && getline(lib.file_lib, year, ' '))
         {
-            string line;
-            string genre, author, name, year;
-            Book* new_book = new Book();
-            while (getline(lib.file_lib, genre, ' ') && getline(lib.file_lib, author, ' ')
-                && getline(lib.file_lib, name, ' ')
-                && getline(lib.file_lib, year, ' '))
-            {
-                new_book->SetGenre(genre);
-                new_book->SetAuthor(author);
-                new_book->SetName(name);
-                new_book->SetDate(year);
-                lib.books.push_back(new_book);
-            }
+            new_book->SetGenre(genre);
+            new_book->SetAuthor(author);
+            new_book->SetName(name);
+            new_book->SetDate(year);
+            lib.books.push_back(new_book);
         }
-        else cout << "File lib_book is not open to read" << endl;
-        lib.file_lib.close();
+    }
+    else cout << "File lib_book is not open to read" << endl;
+    lib.file_lib.close();
 
-        //Чтение пользователей
-        if (lib.file_lib2.is_open())
+    //Чтение пользователей
+    if (lib.file_lib2.is_open())
+    {
+        string line;
+        string id, name, number, email;
+        Person* person = new Person();
+        while (getline(lib.file_lib2, id, ' ') && getline(lib.file_lib2, name, ' ')
+            && getline(lib.file_lib2, number, ' ') && getline(lib.file_lib2, email, ' '))
         {
-            string line;
-            string id, name, number, email;
-            Person* person = new Person();
-            while (getline(lib.file_lib2, id, ' ') && getline(lib.file_lib2, name, ' ')
-                && getline(lib.file_lib2, number, ' ') && getline(lib.file_lib2, email, ' '))
-            {
-                person->SetId(id);
-                person->SetName(name);
-                person->SetNumberPhone(number);
-                person->SetEmail(email);
-                lib.persons.push_back(person);
-            }
+            person->SetId(id);
+            person->SetName(name);
+            person->SetNumberPhone(number);
+            person->SetEmail(email);
+            lib.persons.push_back(person);
         }
-        else cout << "File lib_persons is not open to read" << endl;
-        lib.file_lib2.close();
+    }
+    else cout << "File lib_persons is not open to read" << endl;
+    lib.file_lib2.close();
 
-        lib.file_lib.open("Library_books.txt", fstream::out ); 
-        lib.file_lib2.open("Library_persons.txt", fstream::out );
+    lib.file_lib.open("Library_books.txt", fstream::out);
+    lib.file_lib2.open("Library_persons.txt", fstream::out);
 
-        //Запись из векторa книг в файл
-        if (lib.file_lib.is_open())
+
+    //Запись из векторa книг в файл
+    if (lib.file_lib.is_open())
+    {
+        for (int i = 0; i < lib.books.size(); i++)
         {
-            for (int i = 0; i < lib.books.size(); i++)
-            {
-                lib.file_lib << *lib.books[i]->GetGenre() << ' ' << *lib.books[i]->GetAuthor() << ' ' << *lib.books[i]->GetName() << ' ' << *lib.books[i]->GetDate() << endl;
-            }
-            
+            lib.file_lib << *lib.books[i]->GetGenre() << ' ' << *lib.books[i]->GetAuthor() << ' ' << *lib.books[i]->GetName() << ' ' << *lib.books[i]->GetDate() << endl;
         }
-        else cout << "File lib_books is not open to write" << endl;
-        lib.file_lib.close();
 
-        //запись из вектора пользователей в файл
-        if (lib.file_lib2.is_open()) {
-            for (int i = 0; i < lib.persons.size(); i++)
-            {
-                lib.file_lib2 << *lib.persons[i]->GetId() << ' ' << *lib.persons[i]->GetName() << ' ' << *lib.persons[i]->GetNumberPhone() << ' ' << *lib.persons[i]->GetEmail() << endl;
-            }
-            
+    }
+    else cout << "File lib_books is not open to write" << endl;
+    lib.file_lib.close();
+
+    //запись из вектора пользователей в файл
+    if (lib.file_lib2.is_open()) {
+        for (int i = 0; i < lib.persons.size(); i++)
+        {
+            lib.file_lib2 << *lib.persons[i]->GetId() << ' ' << *lib.persons[i]->GetName() << ' ' << *lib.persons[i]->GetNumberPhone() << ' ' << *lib.persons[i]->GetEmail() << endl;
         }
-        else cout << "File lib_persons is not open to write" << endl;
-        lib.file_lib2.close();
 
-        //
+    }
+    else cout << "File lib_persons is not open to write" << endl;
+    lib.file_lib2.close();
+
+    //
 
     do {
         cout << "Chouse 1. Admin  2. User" << endl;
@@ -90,6 +91,8 @@ int main()
 
         if (person == 1)
         {
+            //Добавить функцию поиск у какого пользователя книга
+            //найти книгу, найти книгу в файле с пользователями и вывести пользователя
             cout << "1. List_Books  2. List_Persons  3. Add_New_Book  4. Delete_Book  5. Search_Book 6. All_List_book 0. Exit" << endl;
             cin >> action;
             do {
@@ -145,7 +148,7 @@ int main()
                     cin.ignore();
                     cout << "Name: "; getline(cin, name);
                     string* str = &name;
-                    Book *book = lib.SearchBook(str);
+                    Book* book = lib.SearchBook(str);
                     book->Print_one_book(*book);
                 }
                 else if (action == 6)
@@ -175,42 +178,55 @@ int main()
 
         else if (person == 2)
         {
-            cout << "1. List_Books 2. Search_Book 3. Take_book 4. Give_book 0. Exit" << endl;
+            cout << "1. List_Books 2. Search_Book 3. Take_book 4. Give_book 5. Get_MyBook 0. Exit" << endl;
             cin >> action;
+            Person person;
             do
             {
-                if (action == 1) 
+                if (action == 1)
                 {
-                    lib.file_lib.open("Library_books.txt", fstream::in);
-
-                    if (lib.file_lib.is_open())
-                    {
-                        string line;
-                        string str;
-                        while (getline(lib.file_lib, line))
-                        {
-                            
-                            cout << line << endl;
-                        }
-                    }
-                    else cout << "File lib_book is not open to read" << endl;
-                    lib.file_lib.close();
+                    cout << "Books: " << endl;
+                    cout << endl;
+                    lib.PrintListBookForPerson();
                 }
                 else if (action == 2)
                 {
-
+                    string name;
+                    cout << "Write name book" << endl;
+                    cin.ignore();
+                    cout << "Name: "; getline(cin, name);
+                    string* str = &name;
+                    Book* book = lib.SearchBook(str);
+                    if (book->GetPrivate() == true)
+                        book->Print_one_book(*book);
+                    else cout << "This book is already taken" << endl;
                 }
                 else if (action == 3)
                 {
-
+                    string name;
+                    cout << "Write name book" << endl;
+                    cin.ignore();
+                    cout << "Name: "; getline(cin, name);
+                    string* str = &name;
+                    Book* book = lib.SearchBook(str);
+                    if (book->GetPrivate() == true)
+                        person.TakeBook(*book);
+                    else cout << "This book is already taken" << endl;
+                    //Изменить файл пользователей(добавить пользователя если он взял книгу)
                 }
                 else if (action == 4)
                 {
-
+                    person.GiveBook(*(person.GetMyBook()));
+                    cout << "You gave the book away" << endl;
                 }
-                cout << "1. List_Books 2. Search_Book 3. Take_book 4. Give_book 0. Exit" << endl;
+                else if (action == 5)
+                {
+                    Book* book = new Book();
+                    book->Print_one_book(*(person.GetMyBook()));
+                }
+                cout << "1. List_Books 2. Search_Book 3. Take_book 4. Give_book 5. Get_MyBook 0. Exit" << endl;
                 cin >> action;
-            } while (action != 0);
+            } while (action != 0); //сделать условие выхода пока пользователь не отдаст книгу
         }
         else
         {
@@ -218,8 +234,8 @@ int main()
         }
 
 
-        
+
     } while (action != 0);
 
-    
+
 }

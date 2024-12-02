@@ -4,6 +4,7 @@
 #include <fstream>
 #include <filesystem>
 #include <string>
+#include "Book.h"
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -40,12 +41,18 @@ string* Person::GetId() { return this->id; }
 string* Person::GetName() { return this->name; }
 string* Person::GetNumberPhone() { return this->NumberPhone; }
 string* Person::GetEmail() { return this->email; }
-
+Book* Person::GetMyBook() { return this->MyBook; }
 
 void Person::SetId(string& id) { this->id = new string(id); }
 void Person::SetName(string& name) { this->name = new string(name); }
 void Person::SetNumberPhone(string& NumberPhone) { this->NumberPhone = new string(NumberPhone); }
 void Person::SetEmail(string& email) { this->email = new string(email); }
+void Person::TakeBook(Book& book) { this->MyBook = &book; this->MyBook->SetPrivate(); }
+void Person::GiveBook(Book& book) 
+{
+	this->MyBook->ChangePrivate();
+	this->MyBook = nullptr;
+}
 
 Person::~Person()
 {
