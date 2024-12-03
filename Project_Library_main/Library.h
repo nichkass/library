@@ -23,11 +23,13 @@ public:
 	  void AddBook(Book& book);
 
 	  void DeleteBook(Book& book);
+	  void DeletePerson(Person& person);
 
 	  void PrintList();
 	  void PrintListPersons();
 
 	  void PrintListBookForPerson();
+	  void PrintOneBook(Book& book);
 
 	  Book* SearchBook(string* NameBook);
 

@@ -4,13 +4,21 @@
 #include "Book.h"
 #include "Library.h"
 #include <fstream>
+#include <filesystem>
+#include <random>
 
 using namespace std;
+
+random_device dev;
+mt19937 rng(dev());
+uniform_int_distribution<> dist(100000, 1000000);
 
 int main()
 {
     bool flag = false;
+    bool Flag = false;
     int action = -1;
+    int action2 = -1;
     Library lib;
 
     lib.file_lib.open("Library_books.txt", fstream::in);
@@ -31,10 +39,11 @@ int main()
             new_book->SetName(name);
             new_book->SetDate(year);
             lib.books.push_back(new_book);
+            lib.file_lib.close();
         }
     }
     else cout << "File lib_book is not open to read" << endl;
-    lib.file_lib.close();
+
 
     //Чтение пользователей
     if (lib.file_lib2.is_open())
@@ -84,16 +93,37 @@ int main()
 
     //
 
+
+
     do {
         cout << "Chouse 1. Admin  2. User" << endl;
-        int person;
-        cin >> person;
+        string pers; int person = -1;
+        getline(cin, pers);
+        
+        do
+        {
+            try { person = stoi(pers); }
+            catch (...)
+            {
+                cout << "Write number please" << endl;
+                cout << "Chouse 1. Admin  2. User" << endl;
+                getline(cin, pers);
+            }
+        } while (person != 1 && person != 2);
 
         if (person == 1)
         {
+            cout << "Write: nickname, password" << endl;
+            string password, nickname;
+            cout << "Nickname: ";
+            cin.ignore();
+            getline(cin, nickname);
+            cout << "Pssword: ";
+            cin.ignore();
+            getline(cin, password); //создать файл с админами и проверять админа
             //Добавить функцию поиск у какого пользователя книга
-            //найти книгу, найти книгу в файле с пользователями и вывести пользователя
-            cout << "1. List_Books  2. List_Persons  3. Add_New_Book  4. Delete_Book  5. Search_Book 6. All_List_book 0. Exit" << endl;
+            // найти книгу в файле с пользователями и вывести пользователя
+            cout << "1. List_Books  2. List_Persons  3. Add_New_Book  4. Delete_Book  5. Search_Book 0. Exit" << endl;
             cin >> action;
             do {
                 if (action == 1)
@@ -116,7 +146,7 @@ int main()
                     cout << "Write: genre, author, name, date" << endl;
                     cin.ignore();
                     cout << "Genre: "; getline(cin, genre);
-                    cout << "Author "; getline(cin, author);
+                    cout << "Author: "; getline(cin, author);
                     cout << "Name: "; getline(cin, name);
                     cout << "Date: "; getline(cin, date);
                     Book* book = new Book();
@@ -151,25 +181,8 @@ int main()
                     Book* book = lib.SearchBook(str);
                     book->Print_one_book(*book);
                 }
-                else if (action == 6)
-                {
-                    lib.file_lib.open("Library_books.txt", fstream::in);
 
-                    if (lib.file_lib.is_open())
-                    {
-                        string line;
-                        string str;
-                        while (getline(lib.file_lib, line))
-                        {
-                            str += line;
-                            str.push_back(' ');
-                            cout << str << endl;
-                        }
-                    }
-                    else cout << "File lib_book is not open to read" << endl;
-                    lib.file_lib.close();
-                }
-                cout << "1. List_Books  2. List_Persons  3. Add_New_Book  4. Delete_Book  5. Search_Book 6. All_List_book 0. Exit" << endl;
+                cout << "1. List_Books  2. List_Persons  3. Add_New_Book  4. Delete_Book  5. Search_Book 0. Exit" << endl;
                 cin >> action;
 
 
@@ -178,18 +191,38 @@ int main()
 
         else if (person == 2)
         {
+            Person* user = new Person();
+            string name, number, email;
+            cout << "Write your name, number phone, email" << endl;
+            cout << "Name: ";
+            cin.ignore();
+            getline(cin, name);
+            cout << "Number phone: ";
+            cin.ignore();
+            getline(cin, number);
+            cout << "Email: ";
+            cin.ignore();
+            getline(cin, email);
+
+            int Id = dist(rng);
+            string id = to_string(Id);
+            user->SetName(name);
+            user->SetEmail(email);
+            user->SetId(id);
+            user->SetNumberPhone(number);
+
             cout << "1. List_Books 2. Search_Book 3. Take_book 4. Give_book 5. Get_MyBook 0. Exit" << endl;
-            cin >> action;
-            Person person;
+            cin >> action2;
+
             do
             {
-                if (action == 1)
+                if (action2 == 1)
                 {
                     cout << "Books: " << endl;
                     cout << endl;
                     lib.PrintListBookForPerson();
                 }
-                else if (action == 2)
+                else if (action2 == 2)
                 {
                     string name;
                     cout << "Write name book" << endl;
@@ -201,7 +234,7 @@ int main()
                         book->Print_one_book(*book);
                     else cout << "This book is already taken" << endl;
                 }
-                else if (action == 3)
+                else if (action2 == 3)
                 {
                     string name;
                     cout << "Write name book" << endl;
@@ -210,23 +243,45 @@ int main()
                     string* str = &name;
                     Book* book = lib.SearchBook(str);
                     if (book->GetPrivate() == true)
-                        person.TakeBook(*book);
+                        user->TakeBook(*book);
                     else cout << "This book is already taken" << endl;
-                    //Изменить файл пользователей(добавить пользователя если он взял книгу)
+
+                    lib.persons.push_back(user);
+
+                    lib.file_lib2.open("Library_persons.txt", fstream::out);
+                    if (lib.file_lib2.is_open())
+                    {
+                        for (int i = 0; i < lib.persons.size(); i++)
+                        {
+                            lib.file_lib2 << *(lib.persons[i]->GetId()) << ' ' << *(lib.persons[i]->GetName()) << ' ' << *(lib.persons[i]->GetNumberPhone()) << ' ' << *(lib.persons[i]->GetEmail()) << ' ' << endl;
+                        }
+                    }
+                    lib.file_lib2.close();
+
+                    Flag = true;
                 }
-                else if (action == 4)
+                else if (action2 == 4)
                 {
-                    person.GiveBook(*(person.GetMyBook()));
+                    user->GiveBook(*(user->GetMyBook()));
                     cout << "You gave the book away" << endl;
+                    lib.DeletePerson(*user);
+                    Flag = false;
                 }
-                else if (action == 5)
+                else if (action2 == 5)
                 {
-                    Book* book = new Book();
-                    book->Print_one_book(*(person.GetMyBook()));
+                    if (user->GetMyBook() != nullptr)
+                        lib.PrintOneBook(*(user->GetMyBook()));
+                    else cout << "You dont have any books" << endl;
+                }
+
+                if (action2 == 0 && Flag == true)
+                {
+                    cout << "you have not returned the book, please return the book to the library" << endl;
                 }
                 cout << "1. List_Books 2. Search_Book 3. Take_book 4. Give_book 5. Get_MyBook 0. Exit" << endl;
-                cin >> action;
-            } while (action != 0); //сделать условие выхода пока пользователь не отдаст книгу
+                cin >> action2;
+
+            } while (Flag != false);
         }
         else
         {
@@ -235,7 +290,7 @@ int main()
 
 
 
-    } while (action != 0);
+    } while (action == 0 && Flag == false);
 
 
 }

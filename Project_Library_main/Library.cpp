@@ -68,6 +68,24 @@ void Library::DeleteBook(Book& book)
 
 }
 
+void Library::DeletePerson(Person& person)
+{
+    bool flag = false;
+    auto i = persons.begin();
+    for (; i < persons.end(); i++)
+    {
+        if (*(*i)->GetName() == *person.GetName())
+        {
+            flag = true;
+            break;
+        }
+    }
+    if (flag)
+    {
+        persons.erase(i);
+    }
+}
+
 void Library::PrintList()
 {
     for (int i = 0; i < books.size(); i++)
@@ -93,6 +111,11 @@ void Library::PrintListBookForPerson()
             cout << *books[i]->GetGenre() << ' ' << *books[i]->GetAuthor() << ' ' << *books[i]->GetName() << ' ' << *books[i]->GetDate() << endl;
         }
     }
+}
+
+void Library::PrintOneBook(Book& book)
+{
+    cout << *(book.GetGenre()) << ' ' << *(book.GetAuthor()) << ' ' << *(book.GetName()) << ' ' << *(book.GetDate()) << endl;
 }
 
 Book* Library::SearchBook(string* NameBook)
