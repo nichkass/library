@@ -18,7 +18,9 @@ public:
 
 	 fstream file_for_person;
 
-	Library();
+	 fstream file_admin;
+
+	 Library();
 
 	  void AddBook(Book& book);
 
@@ -30,6 +32,8 @@ public:
 
 	  void PrintListBookForPerson();
 	  void PrintOneBook(Book& book);
+
+	  bool Check_admin(string &name, string &password);
 
 	  Book* SearchBook(string* NameBook);
 

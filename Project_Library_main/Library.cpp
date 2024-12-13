@@ -126,4 +126,21 @@ Book* Library::SearchBook(string* NameBook)
     }
 }
 
+bool Library::Check_admin(string& name, string& password)
+{
+    file_admin.open("Library_admin.txt", fstream::in);
 
+    if (file_admin.is_open())
+    {
+        string name1, password1;
+        bool res = false;
+        while (getline(file_admin, name1, ' ') && getline(file_admin, password1))
+        {
+            if (name1 == name && password1 == password) { res = true; }
+        }
+        file_admin.close();
+        if (res) { return res; }
+        else return false;
+    }
+    else cout << "File_admin is not open to read" << endl;
+}
