@@ -94,7 +94,7 @@ int main()
             cout << "Nickname: ";
             getline(cin, nickname);
             cout << "Password: ";
-            getline(cin, password); //создать файл с админами и проверять админа
+            getline(cin, password);
             if (lib.Check_admin(nickname, password)) {
                 cout << "1. List_Books  2. List_Persons  3. Add_New_Book  4. Delete_Book  5. Search_Book 0. Exit" << endl;
                 cin >> action;
