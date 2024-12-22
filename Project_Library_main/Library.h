@@ -4,6 +4,7 @@
 #include "Book.h"
 #include "Person.h"
 #include <fstream>
+#include "windows.h"
 //#include <filesystem>
 
 using namespace std;
@@ -36,7 +37,9 @@ public:
 	  bool Check_admin(string &name, string &password);
 
 	  Book* SearchBook(string* NameBook);
+	  Person* SearchPerson(string* name, string* number);
 
 	  vector<Book*> books;
 	  vector<Person*> persons;
+	  vector<Book*> persons_book;
 };

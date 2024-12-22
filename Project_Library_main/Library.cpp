@@ -6,6 +6,7 @@
 #include <fstream>
 #include <filesystem>
 #include <string>
+#include "windows.h"
 
 using namespace std;
 namespace fs = std::filesystem;
@@ -98,7 +99,8 @@ void Library::PrintListPersons()
 {
     for (int i = 0; i < persons.size(); i++)
     {
-        cout << *persons[i]->GetId() << ' ' << *persons[i]->GetName() << ' ' << *persons[i]->GetNumberPhone() << ' ' << *persons[i]->GetEmail() << endl;
+        cout << *persons[i]->GetId() << ' ' << *persons[i]->GetName() << ' ' << *persons[i]->GetNumberPhone() << ' ' << *persons[i]->GetEmail() << endl;;
+        cout << *persons_book[i]->GetGenre() << ' ' << *persons_book[i]->GetAuthor() << ' ' << *persons_book[i]->GetName() << ' ' << *persons_book[i]->GetDate() << endl;
     }
 }
 
@@ -124,8 +126,17 @@ Book* Library::SearchBook(string* NameBook)
     {
         if (*books[i]->GetName() == *NameBook) return books[i];
     }
+    return nullptr;
 }
 
+Person* Library::SearchPerson(string* name, string* number)
+{
+    for (int i = 0; i < persons.size(); i++)
+    {
+        if (*persons[i]->GetName() == *name && *persons[i]->GetNumberPhone() == *number) return persons[i];
+    }
+    return nullptr;
+}
 bool Library::Check_admin(string& name, string& password)
 {
     file_admin.open("Library_admin.txt", fstream::in);

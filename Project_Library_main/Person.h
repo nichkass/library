@@ -4,6 +4,7 @@
 //#include <filesystem>
 #include <string>
 #include "Book.h"
+#include "windows.h"
 
 using namespace std;
 //namespace fs = std::filesystem;
@@ -15,6 +16,7 @@ public:
 	 fstream file;
 	Person(const string& id, const string& name, const  string& NumberPhone, const  string& email);
 	Person(const Person& person);
+
 	 string* GetId();
 	 string* GetName();
 	 string* GetNumberPhone();
