@@ -340,24 +340,24 @@ int main()
             Person* user = new Person();
             cout << "1. Authorization 2. Identification" << endl;
             string choice = "";
-            bool nado = true;
+            bool for_authorization = true;
+            bool check_info = false;
             cout << "Write '1' if you want to log in, or write '2' if you have already been logged in: ";
             getline(cin, choice);
             if (choice == "1")
             {
                 string name, number, email;
-                bool a = false;
+                
                 cout << "Write your name, number phone, email, please" << endl;
 
                 do
                 {
                     cout << "Name: ";
                     getline(cin, name);
-                    if (name.size() > 30) { cout << "Long name!!" << endl; a = true; }
-                    else { a = false; }
-                } while (a != false);
+                    if (name.size() > 30) { cout << "Long name!!" << endl; check_info = true; }
+                    else { check_info = false; }
+                } while (check_info != false);
 
-                bool nado2 = false;
                 do {
                     bool numb = false;
                     bool len_num = false;
@@ -399,13 +399,12 @@ int main()
                     }
                     else { len_num = false; }
 
-                    if (numb == true && len_num == false) nado2 = true;
-                    if (numb == false && len_num == true) nado2 = true;
-                    if (numb == true && len_num == true) nado2 = true;
-                    if (numb == false && len_num == false) nado2 = false;
-                } while (nado2 != false);
+                    if (numb == true && len_num == false) check_info = true;
+                    if (numb == false && len_num == true) check_info = true;
+                    if (numb == true && len_num == true) check_info = true;
+                    if (numb == false && len_num == false) check_info = false;
+                } while (check_info != false);
                 
-                bool nado3 = false;
                 do {
                     cout << "Email: ";
                     getline(cin, email);
@@ -444,11 +443,11 @@ int main()
                     if (sobaka) { cout << "Wrong email" << endl; }
                     if (email.size() > 50) { cout << "Long email" << endl; len_email = true; }
 
-                    if (sobaka == true && len_email == true) nado3 = true;
-                    if (sobaka == true && len_email == false) nado3 = true;
-                    if (sobaka == false && len_email == true) nado3 = true;
-                    if (sobaka == false && len_email == false) nado3 = false;
-                } while (nado3 != false);
+                    if (sobaka == true && len_email == true) check_info = true;
+                    if (sobaka == true && len_email == false) check_info = true;
+                    if (sobaka == false && len_email == true) check_info = true;
+                    if (sobaka == false && len_email == false) check_info = false;
+                } while (check_info != false);
                 int Id = dist(rng);
                 string id = to_string(Id);
                 user->SetId(id);
@@ -485,7 +484,7 @@ int main()
                 if (action2 == "1" || action2 == "2" || action2 == "3" || action2 == "4" || action2 == "5" || action2 == "0") {
                     if (action2 == "1")
                     {
-                        cout << "Books: " << endl;
+                        cout << "Books in the library" << endl;
                         cout << endl;
                         lib.PrintListBookForPerson();
                     }
@@ -546,7 +545,7 @@ int main()
                     }
                     else if (action2 == "5")
                     {
-                        cout << "Your book: " << endl;
+                        cout << "Your book: ";
                         if (user->GetMyBook() != nullptr)
                             lib.PrintOneBook(*(user->GetMyBook()));
                         else cout << "You dont have any books" << endl;
@@ -567,10 +566,10 @@ int main()
 
                 if (action2 == "0" && Flag == false)
                 {
-                    nado = false;
+                    for_authorization = false;
                 }
 
-            } while (nado != false);
+            } while (for_authorization != false);
 
         }
 
