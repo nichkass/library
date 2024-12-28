@@ -31,14 +31,9 @@ Book::Book(const string& genre, const string& author, const string& name, const 
 	string namefile = name + ".txt";
 	file_book.open(namefile, fstream::out | fstream::in | fstream::app);
 	if (file_book.is_open()) {
-		cout << "File sucessful open" << endl;
-		file_book << genre << ' ';
-		file_book << author << ' ';
-		file_book << name << ' ';
-		file_book << date << std::endl;
 		file_book.close();
 	}
-	else cout << "File is not open" << endl;
+	else cout << "Error: File is not open" << endl;
 	
 }
 Book::Book(const Book&book)
@@ -55,14 +50,9 @@ void Book::New_Book()
 	string namefile = *this->name + ".txt";
 	file_book.open(namefile, fstream::out | fstream::in | fstream::app);
 	if (file_book.is_open()) {
-		cout << "File sucessful open" << endl;
-		file_book << *genre << ' ';
-		file_book << *author << ' ';
-		file_book << *name << ' ';
-		file_book << *date << std::endl;
 		file_book.close();
 	}
-	else cout << "File is not open" << endl;
+	else cout << "Error: File is not open" << endl;
 	
 }
 string* Book::GetAuthor() { return this->author; }

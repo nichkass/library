@@ -59,7 +59,7 @@ int main()
         }
         lib.file_lib.close();
     }
-    else cout << "File lib_book is not open to read" << endl;
+    else cout << "Error: File lib_book is not open to read" << endl;
 
     //Reading file with all user
     if (lib.file_lib2.is_open())
@@ -86,14 +86,15 @@ int main()
         }
         lib.file_lib2.close();
     }
-    else cout << "File lib_persons is not open to read" << endl;
+    else cout << "Error: File lib_persons is not open to read" << endl;
 
 
 
     bool exit = false;
 
     do {
-        cout << "Chouse 1. Admin  2. User" << endl;
+        cout << "\t\t\tAuthorization" << endl;
+        cout << "\t\t1. Admin  2. User" << endl;
         string pers; int person = -1;
         cout << "Write '1' or '2': ";
         getline(cin, pers);
@@ -106,22 +107,32 @@ int main()
                 person = stoi(pers);
                 if (person != 1 && person != 2)
                 {
+                    system("cls");
                     cout << "Please write 1 or 2" << endl;
-                    cout << "Chouse 1. Admin  2. User" << endl;
+                    Sleep(1000);
+                    system("cls");
+                    cout << "\t\t\tAuthorization" << endl;
+                    cout << "\t\t1. Admin  2. User" << endl;
+                    cout << "Write '1' or '2': ";
                     getline(cin, pers);
                 }
             }
             catch (...)
             {
+                system("cls");
                 cout << "Write number please" << endl;
-                cout << "Chouse 1. Admin  2. User" << endl;
+                Sleep(1000);
+                system("cls");
+                cout << "\t\t\tAuthorization" << endl;
+                cout << "\t\t1. Admin  2. User" << endl;
                 cout << "Write '1' or '2': ";
                 getline(cin, pers);
             }
         } while (person != 1 && person != 2);
-
+        Loading();
         if (person == 1)
         {
+            cout << "\t\t\tAdmin" << endl;
             cout << "Write: nickname, password" << endl;
             string password, nickname;
             cout << "Nickname: ";
@@ -135,6 +146,7 @@ int main()
                 cout << "The correct password" << endl;
                 Sleep(500);
                 system("cls");
+                cout << "\t\t\tAdmin" << endl;
                 cout << "1. List_Books  2. List_Users  3. Add_New_Book  4. Delete_Book  5. Search_Book 6. Search_User's_book 0. Exit" << endl;
                 cout << "Your choice: ";
                 getline(cin, action);
@@ -143,13 +155,13 @@ int main()
                     if (action == "1" || action == "2" || action == "3" || action == "4" || action == "5" || action == "6") {
                         if (action == "1")
                         {
-                            cout << "Books in the our library" << endl;
+                            cout << "\t\tLibrary" << endl;
                             cout << endl;
                             lib.PrintList();
                         }
                         else if (action == "2")
                         {
-                            cout << "Users" << endl;
+                            cout << "\t\tUsers" << endl;
                             cout << endl;
                             lib.PrintListPersons();
                         }
@@ -164,7 +176,7 @@ int main()
                             vector<char> numbers = { '1','2','3','4','5','6','7','8','9','0' };
                             cout << "Write information about book" << endl;
                             do {
-                                cout << "Genre: "; 
+                                cout << "Genre: ";
                                 getline(cin, genre);
                                 for (int i = 0; i < genre.size(); i++)
                                 {
@@ -175,11 +187,11 @@ int main()
                                 }
                                 if (genre.size() > 20) { len = true; }
                                 if (len) {
-                                    cout << "Long genre!!" << endl;
+                                    cout << "Error: Long genre!!" << endl;
                                 }
                                 if (num)
                                 {
-                                    cout << "There are numbers in the record" << endl;
+                                    cout << "Error: There are numbers in the record" << endl;
                                 }
 
                                 if (num == true && len == true) check = true;
@@ -202,11 +214,11 @@ int main()
                                 }
                                 if (author.size() > 30) { len = true; }
                                 if (len) {
-                                    cout << "Long author name!!" << endl;
+                                    cout << "Error: Long author name!!" << endl;
                                 }
                                 if (num)
                                 {
-                                    cout << "There are numbers in the record" << endl;
+                                    cout << "Error: There are numbers in the record" << endl;
                                 }
 
                                 if (num == true && len == true) check = true;
@@ -222,7 +234,7 @@ int main()
                                 cout << "Name: "; getline(cin, name);
                                 if (name.size() > 30) { len = true; }
                                 if (len) {
-                                    cout << "Long name!!" << endl;
+                                    cout << "Error: Long name!!" << endl;
                                 }
                                 if (len == true) check = true;
                                 else check = false;
@@ -243,11 +255,11 @@ int main()
                                 }
                                 if (date.size() > 4) { len = true; }
                                 if (len) {
-                                    cout << "Long date!!" << endl;
+                                    cout << "Error: Long date!!" << endl;
                                 }
                                 if (num)
                                 {
-                                    cout << "There are letters in the record" << endl;
+                                    cout << "Error: There are letters in the record" << endl;
                                 }
 
                                 if (num == true && len == true) check = true;
@@ -281,7 +293,7 @@ int main()
                                 lib.DeleteBook(*book);
                                 cout << "Your book deleted" << endl;
                             }
-                            else cout << "This book is not in the library" << endl;
+                            else cout << "No such book has been found" << endl;
                         }
                         else if (action == "5")
                         {
@@ -293,7 +305,7 @@ int main()
                             string* str = &name;
                             Book* book = lib.SearchBook(str);
                             if (book != nullptr) { book->Print_one_book(*book); }
-                            else cout << "This book is not in the library" << endl;
+                            else cout << "No such book has been found" << endl;
                         }
                         else if (action == "6")
                         {
@@ -301,7 +313,7 @@ int main()
                             cout << "Please write user's data" << endl;
                             cout << "Name: "; getline(cin, name);
                             cout << "Number: "; getline(cin, number);
-                            string* s1 = &name; string* s2 = &number; 
+                            string* s1 = &name; string* s2 = &number;
                             Person* pers = lib.SearchPerson(s1, s2);
                             if (pers != nullptr)
                             {
@@ -311,6 +323,7 @@ int main()
                                     {
                                         cout << "The book that the user had: ";
                                         lib.PrintOneBook(*(lib.persons_book[i]));
+                                        break;
                                     }
                                 }
                             }
@@ -319,6 +332,8 @@ int main()
                     }
                     else cout << "Error: There is no such choice " << endl;
 
+                    cout << endl;
+                    cout << "\t\t\tAdmin" << endl;
                     cout << "1. List_Books  2. List_Users  3. Add_New_Book  4. Delete_Book  5. Search_Book 6. Search_User's_book 0. Exit" << endl;
                     cout << "Your choice: ";
                     getline(cin, action);
@@ -338,6 +353,7 @@ int main()
         else if (person == 2)
         {
             Person* user = new Person();
+            cout << "\t\t\tUser" << endl;
             cout << "1. Authorization 2. Identification" << endl;
             string choice = "";
             bool for_authorization = true;
@@ -347,14 +363,14 @@ int main()
             if (choice == "1")
             {
                 string name, number, email;
-                
+
                 cout << "Write your name, number phone, email, please" << endl;
 
                 do
                 {
                     cout << "Name: ";
                     getline(cin, name);
-                    if (name.size() > 30) { cout << "Long name!!" << endl; check_info = true; }
+                    if (name.size() > 30) { cout << "Error: Long name!!" << endl; check_info = true; }
                     else { check_info = false; }
                 } while (check_info != false);
 
@@ -365,18 +381,18 @@ int main()
 
                     cout << "Number phone: ";
                     getline(cin, number);
-                    
+
                     string num2 = number;
                     if (number[0] == '+')
                     {
                         string n = "";
                         for (int i = 1; i < number.size(); i++)
                         {
-                             n += number[i];
+                            n += number[i];
                         }
                         number = n;
                     }
-                    vector<char> figure = { '1','2','3','4','5','6','7','8','9','0'};
+                    vector<char> figure = { '1','2','3','4','5','6','7','8','9','0' };
                     bool f = true;
                     for (int i = 0; i < number.size(); i++)
                     {
@@ -388,14 +404,14 @@ int main()
                         if (f)
                         {
                             numb = true;
-                            cout << "Wrong number!!" << endl;
+                            cout << "Error: Wrong number!!" << endl;
                             break;
                         }
-                    } 
+                    }
                     number = num2;
 
                     if (number.size() > 13) {
-                        cout << "Long number" << endl; len_num = true;
+                        cout << "Error: Long number" << endl; len_num = true;
                     }
                     else { len_num = false; }
 
@@ -404,7 +420,7 @@ int main()
                     if (numb == true && len_num == true) check_info = true;
                     if (numb == false && len_num == false) check_info = false;
                 } while (check_info != false);
-                
+
                 do {
                     cout << "Email: ";
                     getline(cin, email);
@@ -417,7 +433,7 @@ int main()
                     }
                     if (k == 1) { sobaka = false; }
                     string str_expansion = "";
-                    vector<string> expansion = { "@yandex.ru", "@mail.ru", "@inbox.ru", "@bk.ru", "@hotmail.com", "@live.com", "@xakep.ru", "@furmail.ru"};
+                    vector<string> expansion = { "@yandex.ru", "@mail.ru", "@inbox.ru", "@bk.ru", "@hotmail.com", "@live.com", "@xakep.ru", "@furmail.ru" };
                     if (!sobaka) {
                         for (int i = 0; i < email.size(); i++)
                         {
@@ -440,8 +456,8 @@ int main()
                     {
                         if (str_expansion == expansion[i]) { sobaka = false; }
                     }
-                    if (sobaka) { cout << "Wrong email" << endl; }
-                    if (email.size() > 50) { cout << "Long email" << endl; len_email = true; }
+                    if (sobaka) { cout << "Error: Wrong email" << endl; }
+                    if (email.size() > 50) { cout << "Error: Long email" << endl; len_email = true; }
 
                     if (sobaka == true && len_email == true) check_info = true;
                     if (sobaka == true && len_email == false) check_info = true;
@@ -458,22 +474,23 @@ int main()
             else if (choice == "2")
             {
                 string name, number;
-                
+
                 cout << "Please write your name, number phone, please" << endl;
                 do {
                     cout << "Name: "; getline(cin, name);
                     cout << "Number: "; getline(cin, number);
                     string* s1 = &name; string* s2 = &number;
                     user = lib.SearchPerson(s1, s2);
-                    if (user == nullptr) cout << "Wrong data" << endl;
+                    if (user == nullptr) cout << "Error: Wrong data" << endl;
                 } while (user == nullptr);
-                    
+
             }
             else {
                 cout << "Error: There is no such choice " << endl; break;
             }
-            
 
+            Loading();
+            cout << "\t\t\tUser" << endl;
             cout << "1. List_Books 2. Search_Book 3. Take_book 4. Give_book 5. Get_MyBook 0. Exit" << endl;
             cout << "Your choice: ";
             getline(cin, action2);
@@ -484,7 +501,7 @@ int main()
                 if (action2 == "1" || action2 == "2" || action2 == "3" || action2 == "4" || action2 == "5" || action2 == "0") {
                     if (action2 == "1")
                     {
-                        cout << "Books in the library" << endl;
+                        cout << "\t\t\tLibrary" << endl;
                         cout << endl;
                         lib.PrintListBookForPerson();
                     }
@@ -500,7 +517,7 @@ int main()
                                 book->Print_one_book(*book);
                             else cout << "This book is already taken" << endl;
                         }
-                        else cout << "This book is not in the library" << endl;
+                        else cout << "No such book has been found" << endl;
                     }
                     else if (action2 == "3")
                     {
@@ -532,7 +549,7 @@ int main()
                             }
                             else cout << "You already taken book, please give book in library" << endl;
                         }
-                        else cout << "This book is not in the library" << endl;
+                        else cout << "No such book has been found" << endl;
                     }
                     else if (action2 == "4")
                     {
@@ -559,7 +576,8 @@ int main()
                 {
                     cout << "you have not returned the book, please return the book to the library" << endl;
                 }
-
+                cout << endl;
+                cout << "\t\t\tUser" << endl;
                 cout << "1. List_Books 2. Search_Book 3. Take_book 4. Give_book 5. Get_MyBook 0. Exit" << endl;
                 cout << "Your choice: ";
                 getline(cin, action2);
@@ -581,6 +599,7 @@ int main()
 
     } while (exit != true);
 
+    Loading();
 
     lib.file_lib.open("Library_books.txt", fstream::out);
     lib.file_lib2.open("Library_persons.txt", fstream::out);
@@ -594,20 +613,20 @@ int main()
         }
 
     }
-    else cout << "File lib_books is not open to write" << endl;
+    else cout << "Error: File lib_books is not open to write" << endl;
     lib.file_lib.close();
 
     //Writing users
     if (lib.file_lib2.is_open()) {
         for (int i = 0; i < lib.persons.size(); i++)
         {
-            lib.file_lib2 << *lib.persons[i]->GetId() << ' ' << *lib.persons[i]->GetName() << ' ' << *lib.persons[i]->GetNumberPhone() << ' ' << *lib.persons[i]->GetEmail() 
-                << ' ' << *lib.persons_book[i]->GetGenre() << ' ' << *lib.persons_book[i]->GetAuthor() << ' ' 
+            lib.file_lib2 << *lib.persons[i]->GetId() << ' ' << *lib.persons[i]->GetName() << ' ' << *lib.persons[i]->GetNumberPhone() << ' ' << *lib.persons[i]->GetEmail()
+                << ' ' << *lib.persons_book[i]->GetGenre() << ' ' << *lib.persons_book[i]->GetAuthor() << ' '
                 << *lib.persons_book[i]->GetName() << ' ' << *lib.persons_book[i]->GetDate() << endl;
         }
     }
-    else cout << "File lib_persons is not open to write" << endl;
+    else cout << "Error: File lib_persons is not open to write" << endl;
     lib.file_lib2.close();
 
-
+    cout << "exit completed successfully" << endl;
 }

@@ -27,7 +27,7 @@ void Library::AddBook(Book& book)
         }
         file_lib.close();
     }
-    else cout << "File lib_books is not open to write" << endl;
+    else cout << "Error: File lib_books is not open to write" << endl;
     
 }
 
@@ -65,7 +65,7 @@ void Library::DeleteBook(Book& book)
         }
         file_lib.close();
     }
-    else cout << "File lib_books is not open to write" << endl;
+    else cout << "Error: File lib_books is not open to write" << endl;
 
 }
 
@@ -153,5 +153,5 @@ bool Library::Check_admin(string& name, string& password)
         if (res) { return res; }
         else return false;
     }
-    else cout << "File_admin is not open to read" << endl;
+    else cout << "Error: File_admin is not open to read" << endl;
 }

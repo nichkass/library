@@ -19,14 +19,13 @@ Person::Person(const string& id, const string& name, const string& NumberPhone, 
 	this->email = new string(email);
 	file.open("take_list.txt", fstream::out | fstream::in | fstream::app);
 	if (file.is_open()) {
-		cout << "File sucessful open" << endl;
 		file << id << ' ';
 		file << name << ' ';
 		file << NumberPhone << ' ';
 		file << email << endl;
 		file.close();
 	}
-	else cout << "File is not open" << endl;
+	else cout << "Error: File is not open" << endl;
 	
 }
 Person::Person(const Person& person)
